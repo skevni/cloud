@@ -14,17 +14,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.gb.sklyarov.cloud.server.factory.Factory;
 import ru.gb.sklyarov.cloud.server.network.handler.CommandInboundHandler;
+import ru.gb.sklyarov.cloud.server.service.DatabaseService;
 import ru.gb.sklyarov.cloud.server.service.ServerService;
-import ru.gb.sklyarov.cloud.server.util.PropertyUtil;
-
-import java.util.Map;
+import ru.gb.sklyarov.cloud.server.config.PropertyConfig;
 
 public class NettyServerService implements ServerService {
 
-    private static final Logger log = LogManager.getLogger("NettyServerService");
+    private static final Logger log = LogManager.getLogger(NettyServerService.class);
+    private static DatabaseService databaseService;
 
     @Override
     public void startServer() {
+        databaseService = Factory.initializeDatabaseService();
+        databaseService.connect();
+
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workGroup = new NioEventLoopGroup();
 
@@ -42,7 +45,7 @@ public class NettyServerService implements ServerService {
                         }
                     });
 
-            int server_port = getServerPortFromProperties();
+            int server_port = PropertyConfig.getServerPort();
 
             ChannelFuture future = bootstrap.bind(server_port).sync();
             log.info("The server is up and available on port: " + server_port);
@@ -51,14 +54,10 @@ public class NettyServerService implements ServerService {
             log.error("The server has ended with an error and is unavailable");
             e.printStackTrace();
         } finally {
+            databaseService.disconnect();
+            log.debug("The server has been stopped");
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
         }
-    }
-
-    private int getServerPortFromProperties() {
-        PropertyUtil propertyUtil = Factory.getProperty();
-        Map<String, String> properties = propertyUtil.getAllProperties();
-        return Integer.parseInt(properties.getOrDefault("server_port", "9000"));
     }
 }

@@ -1,6 +1,6 @@
 package ru.gb.sklyarov.cloud.server.service;
 
-import ru.gb.domain.Command;
+import ru.gb.sklyarov.domain.Command;
 
 public interface CommandService {
 

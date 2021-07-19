@@ -1,12 +1,9 @@
 package ru.gb.sklyarov.cloud.client.util.impl;
 
-import javafx.application.Application;
-import javafx.scene.shape.Path;
 import ru.gb.sklyarov.cloud.client.util.PropertyUtil;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -21,8 +18,8 @@ public class PropertyUtilImpl implements PropertyUtil {
     }
 
     public Map<String, String> getAllProperties() {
-        try (FileInputStream fileInputStream = new FileInputStream(Paths.get(".").toAbsolutePath() + "config.properties")) {
-            properties.load(fileInputStream);
+        try (InputStream InputStream = PropertyUtilImpl.class.getClassLoader().getResourceAsStream("config.properties")) {
+            properties.load(InputStream);
             properties.forEach((key, value) -> propertiesMap.put((String) key, (String) value));
         } catch (IOException e) {
             e.printStackTrace();

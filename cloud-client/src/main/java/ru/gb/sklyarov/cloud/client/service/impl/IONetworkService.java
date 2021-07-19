@@ -2,7 +2,7 @@ package ru.gb.sklyarov.cloud.client.service.impl;
 
 import io.netty.handler.codec.serialization.ObjectDecoderInputStream;
 import io.netty.handler.codec.serialization.ObjectEncoderOutputStream;
-import ru.gb.domain.Command;
+import ru.gb.sklyarov.domain.Command;
 import ru.gb.sklyarov.cloud.client.factory.Factory;
 import ru.gb.sklyarov.cloud.client.service.NetworkService;
 import ru.gb.sklyarov.cloud.client.util.PropertyUtil;

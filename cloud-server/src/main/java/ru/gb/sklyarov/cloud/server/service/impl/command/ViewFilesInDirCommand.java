@@ -1,7 +1,7 @@
 package ru.gb.sklyarov.cloud.server.service.impl.command;
 
-import ru.gb.domain.Command;
-import ru.gb.domain.FileType;
+import ru.gb.sklyarov.domain.Command;
+import ru.gb.sklyarov.domain.FileType;
 import ru.gb.sklyarov.cloud.server.service.CommandService;
 
 import java.io.File;

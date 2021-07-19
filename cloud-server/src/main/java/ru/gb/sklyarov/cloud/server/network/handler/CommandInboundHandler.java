@@ -2,7 +2,7 @@ package ru.gb.sklyarov.cloud.server.network.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import ru.gb.domain.Command;
+import ru.gb.sklyarov.domain.Command;
 import ru.gb.sklyarov.cloud.server.factory.Factory;
 import ru.gb.sklyarov.cloud.server.service.CommandDictionaryService;
 

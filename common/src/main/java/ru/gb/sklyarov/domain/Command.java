@@ -1,4 +1,4 @@
-package ru.gb.domain;
+package ru.gb.sklyarov.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

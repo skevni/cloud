@@ -3,9 +3,10 @@ package ru.gb.sklyarov.cloud.client.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ru.gb.domain.Command;
+import ru.gb.sklyarov.domain.Command;
 import ru.gb.sklyarov.cloud.client.factory.Factory;
 import ru.gb.sklyarov.cloud.client.service.NetworkService;
 
@@ -19,6 +20,7 @@ public class MainController implements Initializable {
     public TextArea commandResultTextArea;
 
     public NetworkService networkService;
+    public Button btnDownload;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

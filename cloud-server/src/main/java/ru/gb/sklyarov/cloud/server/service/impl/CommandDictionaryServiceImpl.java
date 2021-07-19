@@ -1,6 +1,6 @@
 package ru.gb.sklyarov.cloud.server.service.impl;
 
-import ru.gb.domain.Command;
+import ru.gb.sklyarov.domain.Command;
 import ru.gb.sklyarov.cloud.server.factory.Factory;
 import ru.gb.sklyarov.cloud.server.service.CommandDictionaryService;
 import ru.gb.sklyarov.cloud.server.service.CommandService;
