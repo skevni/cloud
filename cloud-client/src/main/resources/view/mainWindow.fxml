@@ -30,7 +30,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button fx:id="btnUpload" accessibleText="Upload to cloud" layoutX="0.1" layoutY="217.0" mnemonicParsing="false">
+            <Button fx:id="btnUpload" accessibleText="Upload to cloud" layoutX="0.1" layoutY="217.0" mnemonicParsing="false" onAction="#btnTransferToServer">
                 <graphic>
                     <ImageView>
                         <Image url="/image/upload.png"/>

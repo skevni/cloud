@@ -64,7 +64,7 @@ public class MainController implements Initializable {
     private void initializeClientView() {
         createTableView(clientView);
         applicationPath = Paths.get("").toAbsolutePath();
-        clientView.getItems().add(0, new FileInfo(Paths.get(applicationPath.toString(),"..")));
+        clientView.getItems().add(0, new FileInfo(Paths.get(applicationPath.toString(), "..")));
         clientView.getItems().addAll(getFilesDirectories(applicationPath));
         clientView.sort();
     }
@@ -183,29 +183,37 @@ public class MainController implements Initializable {
 
     public void mouseClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
+            btnTransferToServer();
+        }
+    }
 
-            FileInfo fileInfo = (FileInfo) clientView.getSelectionModel().getSelectedItem();
+    public void btnTransferToServer() {
+        FileInfo fileInfo = (FileInfo) clientView.getSelectionModel().getSelectedItem();
 
-            if (fileInfo.getType() == FileType.DIR || fileInfo.getType() == FileType.APARENT) {
-                changeLocalDirectoryAndRefresh(fileInfo);
-            }
+        if (fileInfo.getType() == FileType.DIR || fileInfo.getType() == FileType.APARENT) {
+            changeLocalDirectoryAndRefresh(fileInfo);
+        }
 
-            if (fileInfo.getType() == FileType.FILE) {
-                transferToServer(fileInfo);
-            }
+        if (fileInfo.getType() == FileType.FILE) {
+            transferToServer(fileInfo);
         }
     }
 
     private void changeLocalDirectoryAndRefresh(FileInfo fileInfo) {
         Path path = fileInfo.getPath();
         boolean pathIsRoot = false;
-        if (fileInfo.getType() == FileType.APARENT){
-            if (path.getNameCount() > 1){
-                path = path.getParent();
-            } else {
+
+        if (path.getRoot().equals(path)){
+            return;
+        }
+
+        if (fileInfo.getType() == FileType.APARENT) {
+            if (path.getNameCount() == 1) {
                 pathIsRoot = true;
             }
+            path = path.getParent();
         }
+
         clientView.getItems().clear();
         if (!pathIsRoot) {
             clientView.getItems().add(0, new FileInfo(Paths.get(path.toString(), "..")));
@@ -213,6 +221,7 @@ public class MainController implements Initializable {
         clientView.getItems().addAll(getFilesDirectories(path));
         clientView.sort();
     }
+
     // TODO make file transfer
     private void transferToServer(FileInfo fileInfo) {
     }
