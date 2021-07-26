@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.gb.sklyarov.cloud.client.controller.MainController;
 
-public class MainApplication extends Application {
+public class ClientApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {

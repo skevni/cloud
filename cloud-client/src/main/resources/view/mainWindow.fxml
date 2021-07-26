@@ -10,7 +10,7 @@
     <MenuBar layoutY="2.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" text="Authorization" />
-            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Close" onAction="#exitTheApplication" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
             <MenuItem mnemonicParsing="false" text="About" />
@@ -18,7 +18,7 @@
     </MenuBar>
     <HBox VBox.vgrow="ALWAYS">
         <Pane prefHeight="600.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
-            <TableView maxHeight="Infinity" maxWidth="Infinity" prefHeight="605.0" prefWidth="468.0">
+            <TableView fx:id="clientView" maxHeight="Infinity" maxWidth="Infinity" prefHeight="605.0" prefWidth="468.0" onMouseClicked="#mouseClicked">
 
             </TableView>
         </Pane>
@@ -39,7 +39,7 @@
             </Button>
         </Pane>
         <Pane prefHeight="600.0" prefWidth="475.0" snapToPixel="false" HBox.hgrow="ALWAYS">
-            <TableView maxHeight="Infinity" maxWidth="Infinity" prefHeight="605.0" prefWidth="469.0">
+            <TableView fx:id="serverView" maxHeight="Infinity" maxWidth="Infinity" prefHeight="605.0" prefWidth="469.0">
 
             </TableView>
         </Pane>

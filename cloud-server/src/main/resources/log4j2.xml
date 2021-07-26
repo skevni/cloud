@@ -23,7 +23,7 @@
         <Logger name="ru.gb.sklyarov" level="trace" additivity="false">
             <AppenderRef ref="server"/>
         </Logger>
-        <Root level="error">
+        <Root level="info">
             <AppenderRef ref="stdout"/>
         </Root>
     </Loggers>
