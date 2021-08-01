@@ -6,7 +6,9 @@ public interface NetworkService {
 
     void sendCommand(Command command);
 
-    String readCommandResult();
+    void sendFile(String path);
+
+    void downloadFile(String path);
 
     void closeConnection();
 

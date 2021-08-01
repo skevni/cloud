@@ -5,6 +5,6 @@ import ru.gb.sklyarov.domain.Command;
 
 public interface CommandDictionaryService {
 
-    String processCommand(Command command);
+    Command processCommand(Command command);
 
 }

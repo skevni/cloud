@@ -12,6 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Command implements Serializable {
-    private String commandName;
-    private String[] args;
+    private CommandType commandName;
+    private Object[] args;
 }

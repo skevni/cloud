@@ -1,5 +1,6 @@
 package ru.gb.sklyarov.cloud.server.service.impl;
 
+import lombok.extern.log4j.Log4j2;
 import ru.gb.sklyarov.domain.Command;
 import ru.gb.sklyarov.cloud.server.factory.Factory;
 import ru.gb.sklyarov.cloud.server.service.CommandDictionaryService;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j2
 public class CommandDictionaryServiceImpl implements CommandDictionaryService {
 
     private final Map<String, CommandService> commandDictionary;
@@ -23,20 +25,20 @@ public class CommandDictionaryServiceImpl implements CommandDictionaryService {
 
         Map<String, CommandService> commandDictionary = new HashMap<>();
         for (CommandService commandService : commandServices) {
-            commandDictionary.put(commandService.getCommand(), commandService);
+            commandDictionary.put(commandService.getCommand().toString(), commandService);
         }
 
         return commandDictionary;
     }
 
     @Override
-    public String processCommand(Command command) {
+    public Command processCommand(Command command) {
 
         if (commandDictionary.containsKey(command.getCommandName())) {
             return commandDictionary.get(command.getCommandName()).processCommand(command);
         }
-
-        return "Error command";
+        log.error("The command " + command.getCommandName() + " does not exists");
+        throw new IllegalArgumentException("The command " + command.getCommandName() + " does not exists");
     }
 
 }

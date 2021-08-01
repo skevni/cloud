@@ -1,39 +1,42 @@
 package ru.gb.sklyarov.cloud.server.service.impl.command;
 
 import ru.gb.sklyarov.domain.Command;
+import ru.gb.sklyarov.domain.CommandType;
+import ru.gb.sklyarov.domain.FileInfo;
 import ru.gb.sklyarov.domain.FileType;
 import ru.gb.sklyarov.cloud.server.service.CommandService;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ViewFilesInDirCommand implements CommandService {
 
     @Override
-    public String processCommand(Command command) {
+    public Command processCommand(Command command) {
         final int requirementCountArgs = 1;
 
         if (command.getArgs().length != requirementCountArgs) {
             throw new IllegalArgumentException("Command \"" + getCommand() + "\" is not correct");
         }
 
-        return process(command.getArgs()[0]);
+        return new Command(CommandType.LS, new Object[]{process((String) command.getArgs()[0])});
     }
 
-    private String process(String dirPath) {
+    private List<FileInfo> process(String dirPath) {
+        List<FileInfo> files = new ArrayList<>();
         File directory = new File(dirPath);
 
         if (!directory.exists()) {
-            return "Directory is not exists";
+            return files;
         }
 
-        StringBuilder builder = new StringBuilder();
         for (File childFile : Objects.requireNonNull(directory.listFiles())) {
-            FileType typeFile = getTypeFile(childFile);
-            builder.append(childFile.getName()).append(" | ").append(typeFile).append(System.lineSeparator());
+            files.add(new FileInfo(childFile.toPath()));
         }
 
-        return builder.toString();
+        return files;
     }
 
     private FileType getTypeFile(File childFile) {
@@ -41,8 +44,8 @@ public class ViewFilesInDirCommand implements CommandService {
     }
 
     @Override
-    public String getCommand() {
-        return "ls";
+    public CommandType getCommand() {
+        return CommandType.LS;
     }
 
 }
