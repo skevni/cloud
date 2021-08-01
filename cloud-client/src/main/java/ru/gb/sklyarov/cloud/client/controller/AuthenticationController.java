@@ -13,6 +13,7 @@ public class AuthenticationController implements Initializable {
 
     public PasswordField idPassword;
     public TextField idLogin;
+    public Button btnConnect;
 
     public void toLogin(ActionEvent actionEvent) {
     }
