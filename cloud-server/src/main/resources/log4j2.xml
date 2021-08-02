@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR" debug="false">
+    <Properties>
+        <Property name="logPath">logs</Property>
+    </Properties>
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%d{dd.MM.yyyy HH:mm:ss,SSS} %-5p [%t] %C{1}.%M(%F:%L) - %m%n%throwable"/>
+        </Console>
+        <RollingFile name="server"
+                     fileName="${logPath}/server.log"
+                     filePattern="${logPath}/archive/server-%d{dd-MM-yyyy}.log.gz"
+                     append="true">
+            <PatternLayout pattern="%d{dd.MM.yyyy HH:mm:ss,SSS} %-5p [%t] %C{1}.%M(%F:%L) - %m%n%throwable"/>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+                <SizeBasedTriggeringPolicy size="100M"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="ru.gb.sklyarov" level="trace" additivity="false">
+            <AppenderRef ref="server"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="stdout"/>
+        </Root>
+    </Loggers>
+</Configuration>

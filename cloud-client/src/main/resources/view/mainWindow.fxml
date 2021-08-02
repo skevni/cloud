@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox prefHeight="690.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gb.sklyarov.cloud.client.controller.MainController">
+    <MenuBar layoutY="2.0">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Authorization" />
+            <MenuItem mnemonicParsing="false" text="Close" onAction="#exitTheApplication" />
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About" />
+        </Menu>
+    </MenuBar>
+    <HBox VBox.vgrow="ALWAYS">
+        <Pane prefHeight="600.0" prefWidth="475.0" HBox.hgrow="ALWAYS">
+            <TableView fx:id="clientView" maxHeight="Infinity" maxWidth="Infinity" prefHeight="605.0" prefWidth="468.0" onMouseClicked="#mouseClicked">
+
+            </TableView>
+        </Pane>
+        <Pane prefHeight="610.0" prefWidth="70.0" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnDownload" accessibleText="Download from cloud" layoutX="0.1" layoutY="293.0" mnemonicParsing="false">
+                <graphic>
+                    <ImageView>
+                        <Image url="/image/dowload.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnUpload" accessibleText="Upload to cloud" layoutX="0.1" layoutY="217.0" mnemonicParsing="false" onAction="#btnTransferToServer">
+                <graphic>
+                    <ImageView>
+                        <Image url="/image/upload.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </Pane>
+        <Pane prefHeight="600.0" prefWidth="475.0" snapToPixel="false" HBox.hgrow="ALWAYS">
+            <TableView fx:id="serverView" maxHeight="Infinity" maxWidth="Infinity" prefHeight="605.0" prefWidth="469.0">
+
+            </TableView>
+        </Pane>
+    </HBox>
+    <HBox>
+        <Pane prefHeight="65.0" prefWidth="1000.0" HBox.hgrow="ALWAYS">
+            <Label fx:id="textUser">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+        </Pane>
+    </HBox>
+</VBox>
