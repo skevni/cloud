@@ -9,6 +9,10 @@ public class ServerApplication {
 
         FlywayConfig.migrate();
 
+        Factory.getDatabaseService().connect();
+
+        Factory.getStorageService().initStorage();
+
         Factory.getServerService().startServer();
     }
 }

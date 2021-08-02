@@ -25,7 +25,7 @@ public class NettyServerService implements ServerService {
 
     @Override
     public void startServer() {
-        databaseService = Factory.initializeDatabaseService();
+        databaseService = Factory.getDatabaseService();
         databaseService.connect();
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);

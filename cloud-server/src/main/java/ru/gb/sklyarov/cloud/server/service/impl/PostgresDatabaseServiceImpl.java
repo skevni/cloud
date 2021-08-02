@@ -1,7 +1,6 @@
 package ru.gb.sklyarov.cloud.server.service.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import ru.gb.sklyarov.cloud.server.config.PropertyConfig;
 import ru.gb.sklyarov.cloud.server.service.DatabaseService;
 
@@ -9,10 +8,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Log4j2
 public class PostgresDatabaseServiceImpl implements DatabaseService {
-    private static final Logger log = LogManager.getLogger(PostgresDatabaseServiceImpl.class);
 
+    private static PostgresDatabaseServiceImpl databaseService;
     private static Connection connection;
+
+    public static DatabaseService getDatabaseService() {
+        if (databaseService == null) {
+            databaseService = new PostgresDatabaseServiceImpl();
+        }
+        return databaseService;
+    }
 
     @Override
     public void connect() {
@@ -39,7 +46,9 @@ public class PostgresDatabaseServiceImpl implements DatabaseService {
         }
     }
 
-    public static Connection getConnection() {
+    @Override
+    public Connection getConnection() {
         return connection;
     }
+
 }

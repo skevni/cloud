@@ -36,4 +36,8 @@ public class PropertyConfig {
     public static int getServerPort() {
         return Integer.parseInt(propertiesMap.getOrDefault(PropertyFields.SERVER_PORT.getField(),"9000"));
     }
+
+    public static String getCloudDirectory(){
+        return propertiesMap.getOrDefault(PropertyFields.SERVER_DIRECTORY.getField(),"root");
+    }
 }
